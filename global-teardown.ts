@@ -1,6 +1,5 @@
 import { FullConfig } from '@playwright/test';
 import { reportToAllure } from 'allure-service-client';
-import { reportToXrayWithJunitReport} from 'xray-client';
 
 async function globalTeardown(config: FullConfig) {
   const projectVar = process.env.PROJECT;
