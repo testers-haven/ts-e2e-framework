@@ -51,7 +51,6 @@ const config: PlaywrightTestConfig = {
     baseURL: urls[environmentVar].website,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on",
-    headless: process.env.CI ? true : false,
     video: "on-first-retry",
   },
 
@@ -60,7 +59,7 @@ const config: PlaywrightTestConfig = {
     {
       name: 'chrome',
       use: {
-        headless: false,
+        headless: process.env.CI ? true : false,
         ...devices['Desktop Chrome'],
       },
     },
