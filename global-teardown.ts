@@ -7,7 +7,7 @@ async function globalTeardown(config: FullConfig) {
   if (process.env.ALLURE_GENERATE_REPORT === 'true') {
     let options = {
       project: projectVar,
-      resultsFolder: `projects/${projectVar}/reports/allure/`,
+      resultsFolder: config.reporter.find(r => r.some(t => t.includes('allure') ))[1].outputFolder,
       cleanupFilesAfterUpload: false,
       host: process.env.ALLURE_HOST,
     };
@@ -16,24 +16,6 @@ async function globalTeardown(config: FullConfig) {
       await reportToAllure(options);
     } catch (e) {
       console.error('Allure Error response: ', e);
-    }
-  }
-  if (process.env.XRAY_GENERATE_REPORT === 'true') {
-    try {
-      let options = {
-        project: 'CS',
-        resultsFolder: `projects/${projectVar}/reports/junit/`,
-        resultsFile: 'report.xml',
-        host: process.env.XRAY_HOST,
-        testPlan: process.env.XRAY_TESTPLAN,
-        security: {
-          client_id: process.env.XRAY_ID,
-          client_secret: process.env.XRAY_SECRET,
-        },
-      };
-      await reportToXrayWithJunitReport(options);
-    } catch (e) {
-      console.error('Xray Error response: ', e);
     }
   }
 }

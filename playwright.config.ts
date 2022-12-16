@@ -32,26 +32,16 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter:[['allure-playwright', {
+  reporter:  [['allure-playwright', {
     detail: true,
-    outputFolder: resolve(__dirname, `projects/${projectVar}/reports/allure`),
+    outputFolder: resolve(__dirname, `projects/${projectVar}/test-results/allure`),
     suiteTitle: false
   }],
-   ['junit', {
-    // Whether to add <properties> with all annotations; default is false
-    embedAnnotationsAsProperties: true,
-  
-    // By default, annotation is reported as <property name='' value=''>.
-    // These annotations are reported as <property name=''>value</property>.
-    textContentAnnotations: ['test_description'],
-  
-    // This will create a "testrun_evidence" property that contains all attachments. Each attachment is added as an inner <item> element.
-    // Disables [[ATTACHMENT|path]] in the <system-out>.
-    embedAttachmentsAsProperty: 'testrun_evidence',
-  
-    // Where to put the report.
-    outputFile: resolve(__dirname, `projects/${projectVar}/reports/junit/report.xml`)
-  }]],
+   ["html", {
+    open: process.env.CI ? "never" : "on-failure", 
+    outputFolder: resolve(__dirname, `projects/${projectVar}/test-results/html`)
+  }] 
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -60,7 +50,9 @@ const config: PlaywrightTestConfig = {
     screenshot: 'only-on-failure',
     baseURL: urls[environmentVar].website,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: "on",
+    headless: process.env.CI ? true : false,
+    video: "on-first-retry",
   },
 
   /* Configure projects for major browsers */
