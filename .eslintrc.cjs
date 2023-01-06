@@ -3,9 +3,23 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   root: true,
-  rules: {},
+  rules: {
+    "@typescript-eslint/no-var-requires": "off"
+  },
   env: {
     browser: true,
     es2021: true,
   },
+  "ignorePatterns": [
+    "**/config/*.js",
+    "*.graphql",
+    "tsconfig.json",
+    "**/package.json",
+    "**/package-lock.json",
+    "**/out/*.json",
+    "**/*.png",
+    "**/*.xml",
+    "**/*.html",
+    "**/*.md"
+  ],
 }
