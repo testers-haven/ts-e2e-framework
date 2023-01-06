@@ -3,10 +3,10 @@ version: 2.1
 parameters:
   project:
     type: string
-    default: ''
+    default: 'blog'
   environment:
     type: string
-    default: ''
+    default: 'live'
 
 orbs:
   node: circleci/node@4.7
