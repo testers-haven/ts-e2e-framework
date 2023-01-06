@@ -16,5 +16,5 @@ export class HomePage extends BasePage {
 
   async paragraph(text:string) {
     return this.page.locator('p', { hasText: text });
-   };
+   }
 }

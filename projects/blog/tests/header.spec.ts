@@ -4,7 +4,7 @@ import { allure } from "allure-playwright";
 
 test('header redirects to posts', async ({ page }) => {
     allure.id('RT176266');
-    let app = new App(page);
+    const app = new App(page);
     
     await app.homePage.open();
     await app.header.goToPosts();
@@ -17,7 +17,7 @@ test('header redirects to posts', async ({ page }) => {
 
 test('header redirects to stories', async ({ page }) => {
     allure.id('RT176265');
-    let app = new App(page);
+    const app = new App(page);
     
     await app.homePage.open();
     await app.header.goToStories();

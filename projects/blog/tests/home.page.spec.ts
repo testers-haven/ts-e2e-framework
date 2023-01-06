@@ -5,7 +5,7 @@ import { allure } from "allure-playwright";
 
 test('homepage has title and links to intro page', async ({ page }) => {
   allure.id('ST176243');
-  let app = new App(page);
+  const app = new App(page);
   
   await app.homePage.open();
 
