@@ -4,8 +4,7 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
 import { resolve } from 'path'
 
-const environmentVar =
-  process.env.TEST_ENVIRONMENT === undefined ? '' : process.env.TEST_ENVIRONMENT
+const environmentVar = process.env.TEST_ENVIRONMENT === undefined ? '' : process.env.TEST_ENVIRONMENT
 const projectVar = process.env.PROJECT
 const { urls } = require(`./projects/${projectVar}/constants/urls`)
 ;('')
@@ -39,10 +38,7 @@ const config: PlaywrightTestConfig = {
       'allure-playwright',
       {
         detail: true,
-        outputFolder: resolve(
-          __dirname,
-          `projects/${projectVar}/test-results/allure`
-        ),
+        outputFolder: resolve(__dirname, `projects/${projectVar}/test-results/allure`),
         suiteTitle: false,
       },
     ],
@@ -50,10 +46,7 @@ const config: PlaywrightTestConfig = {
       'html',
       {
         open: process.env.CI ? 'never' : 'on-failure',
-        outputFolder: resolve(
-          __dirname,
-          `projects/${projectVar}/test-results/html`
-        ),
+        outputFolder: resolve(__dirname, `projects/${projectVar}/test-results/html`),
       },
     ],
   ],
