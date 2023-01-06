@@ -11,7 +11,7 @@ if (!project) {
   process.exit(0);
 }
 if (!fs.existsSync(`projects/${project}`)) {
-  console.log(`"${project}" project doesn\'t exist`);
+  console.log(`"${project}" project doesn't exist`);
   process.exit(0);
 }
 
