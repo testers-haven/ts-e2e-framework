@@ -4,9 +4,9 @@ import { reportToAllure } from 'allure-service-client';
 async function globalTeardown(config: FullConfig) {
     const projectVar = process.env.PROJECT;
     if (process.env.ALLURE_GENERATE_REPORT === 'true') {
-      let allureReporter = config.reporter
+      const allureReporter = config.reporter
       .find(r => r.some(t => t.includes('allure') ))?.find(r => r.outputFolder !== undefined);
-      let options = {
+      const options = {
         project: projectVar,
         resultsFolder: allureReporter.outputFolder,
         cleanupFilesAfterUpload: false,
