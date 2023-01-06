@@ -1,0 +1,41 @@
+version: 2.1
+
+parameters:
+  project:
+    type: string
+    default: ''
+  environment:
+    type: string
+    default: ''
+
+orbs:
+  node: circleci/node@4.7
+
+commands:
+  add_variables:
+    description: Add env variables
+    steps:
+      - run:
+          name: Add environment variables
+          command: |
+            echo "export TEST_ENVIRONMENT=<< pipeline.parameters.environment >>" >> $BASH_ENV
+            echo "export PROJECT=<< pipeline.parameters.project >>" >> $BASH_ENV
+            source $BASH_ENV
+jobs:
+  run-test:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.28.1-focal
+    # Steps to the job
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - add_variables
+      - run:
+          name: Run tests
+          command: npm run test
+
+workflows:
+  run-test-workflow:
+    jobs:
+      - run-test
