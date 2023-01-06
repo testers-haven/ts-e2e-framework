@@ -6,8 +6,7 @@ import { resolve } from 'path'
 
 const environmentVar = process.env.TEST_ENVIRONMENT === undefined ? '' : process.env.TEST_ENVIRONMENT
 const projectVar = process.env.PROJECT
-const { urls } = require(`./projects/${projectVar}/constants/urls`)
-;('')
+const { urls } = require(`./projects/${projectVar}/constants/urls`);
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -34,6 +33,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
+    ['list'],
     [
       'allure-playwright',
       {
