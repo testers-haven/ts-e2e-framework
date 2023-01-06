@@ -1,24 +1,25 @@
-import { FullConfig } from '@playwright/test';
-import { reportToAllure } from 'allure-service-client';
+import { FullConfig } from '@playwright/test'
+import { reportToAllure } from 'allure-service-client'
 
 async function globalTeardown(config: FullConfig) {
-    const projectVar = process.env.PROJECT;
-    if (process.env.ALLURE_GENERATE_REPORT === 'true') {
-      const allureReporter = config.reporter
-      .find(r => r.some(t => t.includes('allure') ))?.find(r => r.outputFolder !== undefined);
-      const options = {
-        project: projectVar,
-        resultsFolder: allureReporter.outputFolder,
-        cleanupFilesAfterUpload: false,
-        host: process.env.ALLURE_HOST,
-      };
-  
-      try {
-        await reportToAllure(options);
-      } catch (e) {
-        console.error('Allure Error response: ', e);
-      }
+  const projectVar = process.env.PROJECT
+  if (process.env.ALLURE_GENERATE_REPORT === 'true') {
+    const allureReporter = config.reporter
+      .find(r => r.some(t => t.includes('allure')))
+      ?.find(r => r.outputFolder !== undefined)
+    const options = {
+      project: projectVar,
+      resultsFolder: allureReporter.outputFolder,
+      cleanupFilesAfterUpload: false,
+      host: process.env.ALLURE_HOST,
     }
+
+    try {
+      await reportToAllure(options)
+    } catch (e) {
+      console.error('Allure Error response: ', e)
+    }
+  }
 }
 
-export default globalTeardown;
+export default globalTeardown

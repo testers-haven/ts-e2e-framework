@@ -1,21 +1,20 @@
-import { Page } from '@playwright/test';
-import { BasePage } from './base.page';
+import { Page } from '@playwright/test'
+import { BasePage } from './base.page'
 
 export class StoriesPage extends BasePage {
   constructor(page: Page) {
-    super(page);
+    super(page)
   }
 
   get title() {
-    return this.page.locator('h1', { hasText: "Stories" });
+    return this.page.locator('h1', { hasText: 'Stories' })
   }
 
-  
   get stories() {
-    return this.page.locator('div[class="post-item"]');
+    return this.page.locator('div[class="post-item"]')
   }
 
   async open() {
-    await this.page.goto('/stories');
+    await this.page.goto('/stories')
   }
 }

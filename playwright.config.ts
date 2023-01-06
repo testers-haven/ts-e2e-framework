@@ -1,12 +1,14 @@
-require('dotenv').config();
+require('dotenv').config()
 
-import type { PlaywrightTestConfig } from '@playwright/test';
-import { devices } from '@playwright/test';
-import { resolve } from 'path';
+import type { PlaywrightTestConfig } from '@playwright/test'
+import { devices } from '@playwright/test'
+import { resolve } from 'path'
 
-const environmentVar = (process.env.TEST_ENVIRONMENT === undefined) ? "" : process.env.TEST_ENVIRONMENT;
-const projectVar = process.env.PROJECT;
-const { urls } = require(`./projects/${projectVar}/constants/urls`); '';
+const environmentVar =
+  process.env.TEST_ENVIRONMENT === undefined ? '' : process.env.TEST_ENVIRONMENT
+const projectVar = process.env.PROJECT
+const { urls } = require(`./projects/${projectVar}/constants/urls`)
+;('')
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -21,7 +23,7 @@ const config: PlaywrightTestConfig = {
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000
+    timeout: 5000,
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -32,15 +34,28 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter:  [['allure-playwright', {
-    detail: true,
-    outputFolder: resolve(__dirname, `projects/${projectVar}/test-results/allure`),
-    suiteTitle: false
-  }],
-   ["html", {
-    open: process.env.CI ? "never" : "on-failure", 
-    outputFolder: resolve(__dirname, `projects/${projectVar}/test-results/html`)
-  }] 
+  reporter: [
+    [
+      'allure-playwright',
+      {
+        detail: true,
+        outputFolder: resolve(
+          __dirname,
+          `projects/${projectVar}/test-results/allure`
+        ),
+        suiteTitle: false,
+      },
+    ],
+    [
+      'html',
+      {
+        open: process.env.CI ? 'never' : 'on-failure',
+        outputFolder: resolve(
+          __dirname,
+          `projects/${projectVar}/test-results/html`
+        ),
+      },
+    ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -50,8 +65,8 @@ const config: PlaywrightTestConfig = {
     screenshot: 'only-on-failure',
     baseURL: urls[environmentVar].website,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on",
-    video: "on-first-retry",
+    trace: 'on',
+    video: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
@@ -63,7 +78,7 @@ const config: PlaywrightTestConfig = {
         ...devices['Desktop Chrome'],
       },
     },
-/*
+    /*
     {
       name: 'firefox',
       use: {
@@ -116,6 +131,6 @@ const config: PlaywrightTestConfig = {
   //   command: 'npm run start',
   //   port: 3000,
   // },
-};
+}
 
-export default config;
+export default config

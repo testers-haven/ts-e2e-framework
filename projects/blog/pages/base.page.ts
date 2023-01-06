@@ -1,13 +1,13 @@
-import { Page } from '@playwright/test';
+import { Page } from '@playwright/test'
 
 export class BasePage {
-  readonly page: Page;
+  readonly page: Page
 
   constructor(page: Page) {
-    this.page = page;
+    this.page = page
   }
 
   async open() {
-    await this.page.goto('/');
+    await this.page.goto('/')
   }
 }

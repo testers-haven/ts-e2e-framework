@@ -1,5 +1,5 @@
 export const urls = {
-    live: {
-      website: "https://blog.testerhaven.com"
-    }
-  };
+  live: {
+    website: 'https://blog.testerhaven.com',
+  },
+}
